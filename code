@@ -1,0 +1,145 @@
+from tkinter import *
+from random import randint
+from PIL import Image,ImageTk
+t=Tk()
+t.title("RPC")
+img=ImageTk.PhotoImage(Image.open("C:\\Users\\mansu\\OneDrive\\Pictures\\rps.png"))
+imglabel=Label(t,image=img)
+imglabel.grid(row=1,column=2)
+l=Label(t,text="WELCOME",font=300)
+l.grid(row=2,column=2)
+a=0
+b=0
+def start1():
+    global a
+    global b
+    b=0
+    global msg
+    if(a==0):
+     t.destroy()
+     a=1
+    w = Tk()
+    w.title("RPS")
+    w.configure(background="light blue4")
+    # Store images as attributes of the window to prevent garbage collection
+    rockimg = ImageTk.PhotoImage(Image.open("C:\\Users\\mansu\\OneDrive\\Pictures\\thumb.jpg"))
+    paperimg = ImageTk.PhotoImage(Image.open("C:\\Users\\mansu\\OneDrive\\Pictures\\paper.jpg"))
+    scissorimg =ImageTk.PhotoImage(Image.open("C:\\Users\\mansu\\OneDrive\\Pictures\\scissor.jpg"))
+    crockimg =ImageTk.PhotoImage(Image.open("C:\\Users\\mansu\\OneDrive\\Pictures\\thumb.jpg"))
+    cpaperimg =ImageTk.PhotoImage(Image.open("C:\\Users\\mansu\\OneDrive\\Pictures\\paper.jpg"))
+    cscissorimg =ImageTk.PhotoImage(Image.open("C:\\Users\\mansu\\OneDrive\\Pictures\\scissor.jpg"))
+
+    user_label = Label(image=scissorimg)
+    computer_label =Label(image=cscissorimg)
+    user_label.grid(row=2, column=0)
+    computer_label.grid(row=2, column=4)
+
+    playerscore = Label(w, text=0, font=100, bg="#9b59b6", fg="white")
+    computerscore = Label(w, text=0, font=100, bg="#9b59b6", fg="white")
+    playerscore.grid(row=2, column=1)
+    computerscore.grid(row=2, column=3)
+
+    user_indicator = Label(w, font=50, text="USER", bg="lightblue4")
+    computer_indicator = Label(w, font=50, text="COMPUTER", bg="lightblue4")
+    user_indicator.grid(row=1, column=1)
+    computer_indicator.grid(row=1, column=3)
+    
+    msg = Label(w, font=50, bg="lightblue4", fg="white")
+    msg.grid(row=7, column=2)
+
+    def f1():
+        a = "rock"
+        updatechoice(a)
+
+    def f2():
+        a = "paper"
+        updatechoice(a)
+
+    def f3():
+        a = "scissor"
+        updatechoice(a)
+    def updatemessage(x):
+        msg["text"] = x
+    # Update score
+    def updateplayerscore():
+        score = int(playerscore["text"])
+        score += 1
+        playerscore["text"] = str(score)
+
+    def updatecomputerscore():
+        score = int(computerscore["text"])
+        score += 1
+        computerscore["text"] = str(score)
+
+    # Check winner
+    def checkwin(player, computer):
+        if player == computer:
+            updatemessage("It's a tie!!!")
+        elif player == "rock":
+            if computer == "scissor":
+                updatemessage("You won!!")
+                updateplayerscore()
+            else:
+                updatemessage("I won!!")
+                updatecomputerscore()
+        elif player == "paper":
+            if computer == "rock":
+                updatemessage("You won!!")
+                updateplayerscore()
+            else:
+                updatemessage("I won!!")
+                updatecomputerscore()
+        elif player == "scissor":
+            if computer == "paper":
+                updatemessage("You won!!")
+                updateplayerscore()
+            else:
+                updatemessage("I won!!")
+                updatecomputerscore()
+
+    cchoices = ["rock", "paper", "scissor"]
+
+    def updatechoice(x):
+      global b
+      if b<5:
+        b+=1
+        # For computer
+        computerchoice = cchoices[randint(0, 2)]
+        if computerchoice == "rock":
+            computer_label.configure(image=crockimg)
+        elif computerchoice == "paper":
+            computer_label.configure(image=cpaperimg)
+        else:
+            computer_label.configure(image=cscissorimg)
+
+        # For user
+        if x == "rock":
+            user_label.configure(image=rockimg)
+        elif x == "paper":
+            user_label.configure(image=paperimg)
+        else:
+            user_label.configure(image=scissorimg)
+
+        checkwin(x, computerchoice)
+      else:
+          replay()
+    def replay():
+        global b
+        w.destroy()
+        b=0
+        start1()
+    def bye():
+        w.destroy()
+        w1= Tk()
+        image = Image.open("C:/Users/mansu/OneDrive/Pictures/thankyou.jpg")
+        photo = ImageTk.PhotoImage(image)
+        t= Label(image=photo)
+        t.pack()
+        w1.mainloop()
+    rock = Button(w, width=20, height=2, text="ROCK", bg="#FF3E4D", fg="white", command=f1).grid(row=3, column=1)
+    paper = Button(w, width=20, height=2, text="PAPER", bg="#FAD02E", fg="white", command=f2).grid(row=3, column=2)
+    scissor =Button(w, width=20, height=2, text="SCISSOR", bg="#0ABDE3", fg="white", command=f3).grid(row=3, column=3)
+    b1 = Button(w, width=20, height=2, text="REPLAY", bg="lightblue4", fg="white", command=replay).grid(row=4, column=2)
+    b2 = Button(w, width=20, height=2, text="quit",bg="lightblue4", fg="white",command=bye).grid(row=5, column=2)
+    w.mainloop()
+play=Button(t, width=20, height=2, text="play", bg="#FF3E4D", fg="white", command=start1).grid(row=3, column=2)
