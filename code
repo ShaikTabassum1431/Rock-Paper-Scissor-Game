@@ -3,7 +3,7 @@ from random import randint
 from PIL import Image,ImageTk
 t=Tk()
 t.title("RPC")
-img=ImageTk.PhotoImage(Image.open("C:\\Users\\mansu\\OneDrive\\Pictures\\rps.png"))
+img=ImageTk.PhotoImage(Image.open("initial page.png"))
 imglabel=Label(t,image=img)
 imglabel.grid(row=1,column=2)
 l=Label(t,text="WELCOME",font=300)
@@ -22,12 +22,12 @@ def start1():
     w.title("RPS")
     w.configure(background="light blue4")
     # Store images as attributes of the window to prevent garbage collection
-    rockimg = ImageTk.PhotoImage(Image.open("C:\\Users\\mansu\\OneDrive\\Pictures\\thumb.jpg"))
-    paperimg = ImageTk.PhotoImage(Image.open("C:\\Users\\mansu\\OneDrive\\Pictures\\paper.jpg"))
-    scissorimg =ImageTk.PhotoImage(Image.open("C:\\Users\\mansu\\OneDrive\\Pictures\\scissor.jpg"))
-    crockimg =ImageTk.PhotoImage(Image.open("C:\\Users\\mansu\\OneDrive\\Pictures\\thumb.jpg"))
-    cpaperimg =ImageTk.PhotoImage(Image.open("C:\\Users\\mansu\\OneDrive\\Pictures\\paper.jpg"))
-    cscissorimg =ImageTk.PhotoImage(Image.open("C:\\Users\\mansu\\OneDrive\\Pictures\\scissor.jpg"))
+    rockimg = ImageTk.PhotoImage(Image.open("thumb.jpg"))
+    paperimg = ImageTk.PhotoImage(Image.open("paper.jpg"))
+    scissorimg =ImageTk.PhotoImage(Image.open(scissor.jpg"))
+    crockimg =ImageTk.PhotoImage(Image.open("thumb.jpg"))
+    cpaperimg =ImageTk.PhotoImage(Image.open("paper.jpg"))
+    cscissorimg =ImageTk.PhotoImage(Image.open("scissor.jpg"))
 
     user_label = Label(image=scissorimg)
     computer_label =Label(image=cscissorimg)
@@ -131,7 +131,7 @@ def start1():
     def bye():
         w.destroy()
         w1= Tk()
-        image = Image.open("C:/Users/mansu/OneDrive/Pictures/thankyou.jpg")
+        image = Image.open("thankyou.jpg")
         photo = ImageTk.PhotoImage(image)
         t= Label(image=photo)
         t.pack()
